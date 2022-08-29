@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Редактировать Пользователя";
+}
+@model MyWebApp.Models.User
+<h2>Пользователь № @Model.Id</h2>
+@using (Html.BeginForm("Edit", "Account", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Email, "Email")
+            <br />
+            @Html.EditorFor(m => m.Email)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Password, "Пароль")
+            <br />
+            @Html.EditorFor(m => m.Password)
+
+        </p>
+        <p><input type="submit" value="Отправить" /></p>
+    </fieldset>
+}

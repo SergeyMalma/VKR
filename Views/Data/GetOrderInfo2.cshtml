@@ -1,0 +1,78 @@
+﻿
+@{ Layout = null; }
+@{
+    int t1= 0;
+    int t2 = 0;
+    int t3 = 0;
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Сюда вставляется необходимый шаблбон шапки, которая будет сгенерирована вместе с таблицей 
+    </div>
+    <table class="table table-striped">
+
+        <tr>
+
+            @foreach (Order order in Model)
+            {
+                @if (order.Id != 0)
+                {
+                    t1 = 1;
+                }
+
+            }
+            @if (t1 == 01)
+            {<th>Имя</th>}
+            @foreach (Order order in Model)
+            {
+                @if (order.Name != null)
+                {
+                    t2 = 1;
+                }
+
+            }
+            @if (t2 == 01)
+            {
+                <th>Имя</th>
+}
+            @foreach (Order order in Model)
+            {
+                @if (order.OrderID != 0)
+                {
+
+                    t3 = 1;
+
+                }
+            }
+            @if (t3 == 01)
+            {<th>Номер Заказа</th>}
+               
+
+
+
+            <th></th>
+        </tr>
+        @foreach (Order order in Model)
+        {
+            <tr>
+
+                @if (order.Id != 0)
+                {
+                    <th>@order.Id</th>
+                }
+                @if (order.Name != null)
+                {
+                    <th>@order.Name</th>
+                }
+                @if (order.OrderID != 0)
+                {
+                    <th>@order.OrderID</th>
+                }
+
+            </tr>
+        }
+
+    </table>
+</div>
+
+<p>Сюда также будет вставлен любой шаблонный текст и будущие диаграммы</p>

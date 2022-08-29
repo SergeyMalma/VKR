@@ -1,0 +1,112 @@
+﻿@{ Layout = null; }
+@{
+    int t1 = 0;
+    int t2 = 0;
+    int t3 = 0;
+    int t4 = 0;
+    int t5 = 0;
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Сюда вставляется необходимый шаблбон шапки, которая будет сгенерирована вместе с таблицей
+    </div>
+    <table class="table table-striped">
+
+        <tr>
+
+            @foreach (MonthlyIncome monthlyIncome in Model)
+            {
+                @if (monthlyIncome.Month != null)
+                {
+                    t1 = 1;
+                }
+
+            }
+            @if (t1 == 01)
+            {
+                <th>Месяц</th>
+            }
+            @foreach (MonthlyIncome monthlyIncome in Model)
+            {
+                @if (monthlyIncome.Earnings != 0)
+                {
+                    t2 = 1;
+                }
+
+            }
+            @if (t2 == 01)
+            {
+                <th>Выручка</th>
+            }
+            @foreach (MonthlyIncome monthlyIncome in Model)
+            {
+                @if (monthlyIncome.SubscribedUsers != 0)
+                {
+                    t3 = 1;
+                }
+
+            }
+            @if (t3 == 01)
+            {
+                <th>Новые покупатели</th>
+            }
+            @foreach (MonthlyIncome monthlyIncome in Model)
+            {
+                @if (monthlyIncome.UnsubscribedUsers != 0)
+                {
+                    t4 = 1;
+                }
+
+            }
+            @if (t4 == 01)
+            {
+                <th>Потерянные покупатели</th>
+            }
+            @foreach (MonthlyIncome monthlyIncome in Model)
+            {
+                @if (monthlyIncome.SoldLicenses != 0)
+                {
+                    t5 = 1;
+                }
+
+            }
+            @if (t5 == 01)
+            {
+                <th>Количество проданных лицензий</th>
+            }
+
+
+            <th></th>
+        </tr>
+        @foreach (MonthlyIncome monthlyIncome in Model)
+        {
+            <tr>
+
+                @if (monthlyIncome.Month != null)
+                {
+                    <th>@monthlyIncome.Month</th>
+                }
+                @if (monthlyIncome.Earnings != 0)
+                {
+                    <th>@monthlyIncome.Earnings</th>
+                }
+                @if (monthlyIncome.SubscribedUsers != 0)
+                {
+                    <th>@monthlyIncome.SubscribedUsers</th>
+                }
+                @if (monthlyIncome.UnsubscribedUsers != 0)
+                {
+                    <th>@monthlyIncome.UnsubscribedUsers</th>
+                }
+                @if (monthlyIncome.SoldLicenses != 0)
+                {
+                    <th>@monthlyIncome.SoldLicenses</th>
+                }
+
+
+            </tr>
+        }
+
+    </table>
+</div>
+<p>Сюда также будет вставлен любой шаблонный текст и будущие диаграммы</p>

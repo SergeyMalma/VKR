@@ -1,0 +1,55 @@
+﻿@{ Layout = null; }
+<p>
+    Отчет по работе приемной комиссии.
+</p>
+<p> Дата создания отчета:10.05.</p>
+
+<p>Проходной балл для направления 09.03.02:  252</p>
+<p>Всего на направление 09.03.02 подано 52 заявления</p>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Количество поданых заявлений по всем направлениям с 2021-06-21 по 2021-06-27
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Дата</th>
+            <th>09.03.02</th>
+
+            <th>10.03.01</th>
+
+            <th>09.03.01</th>
+
+            <th>09.03.03</th>
+
+            <th>09.03.04</th>
+
+            <th>10.05.01</th>
+
+            <th>38.03.01</th>
+
+            <th>38.05.01</th>
+
+            <th>01.03.05</th>
+
+            <th>03.03.01</th>
+
+        </tr>
+        @foreach (E1table e1Table in Model)
+        {
+            <tr>
+                <td>@e1Table.DateOfApplication</td>
+                <td>@e1Table.d1</td>
+                <td>@e1Table.d2</td>
+                <td>@e1Table.d3</td>
+                <td>@e1Table.d4</td>
+                <td>@e1Table.d5</td>
+                <td>@e1Table.d6</td>
+                <td>@e1Table.d7</td>
+                <td>@e1Table.d8</td>
+                <td>@e1Table.d9</td>
+                <td>@e1Table.d10</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Сгенерированный отчет";
+}
+@using (Html.BeginForm("GetOrderInfo", "Data", FormMethod.Post))
+{
+
+    <input type="submit" value="Отправить" />
+}
+<div>
+    <h3>Выбранные параметры отчеты</h3>
+    <form method="post">
+        <table class="table table-striped">
+            <tr>
+                @if (@ViewBag.IdC == true)
+                {
+                    <th>Id</th>
+                }
+                @if (@ViewBag.NameC == true)
+                {
+                    <th>Имя</th>
+                }
+                @if (@ViewBag.OrderIDC == true)
+                {
+                    <th>Номер заказа</th>
+                }
+                <th></th>
+            </tr>
+            @foreach (Order order in Model)
+            {
+                <tr>
+                    @if (@ViewBag.IdC == true)
+                    {
+                        <th>@order.Id</th>
+                    }
+                    @if (@ViewBag.NameC == true)
+                    {
+                        <th>@order.Name</th>
+                    }
+                    @if (@ViewBag.OrderIDC == true)
+                    {
+                        <th>@order.OrderID</th>
+                    }
+
+                </tr>
+            }
+        </table>
+
+
+    </form>
+</div>

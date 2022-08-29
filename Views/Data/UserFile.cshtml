@@ -1,0 +1,42 @@
+﻿@using MyWebApp.Models
+
+@{
+    ViewBag.Title = "ASP.NET Identity";
+}
+@Html.ActionLink("Добавить файл", "UploadFile")
+
+
+@using (Html.BeginForm("UserFile", "Data", FormMethod.Post))
+{
+    <p>Введите Email: </p>
+    @Html.TextBox("name", "Введите email")
+    <p><input type="submit" value="Найти" /></p>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Сгенерированные отчеты
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Email пользователя</th>
+            <th>Имя файла</th>
+            <th>Дата загрузки</th>
+            <th>Тип файла</th>
+            <th></th>
+        </tr>
+        @foreach (Files files in Model)
+        {
+            <tr>
+
+                <td>@files.UserEmail</td>
+                <td>@files.FileName</td>
+                <td>@files.CreatedOn</td>
+                <td>@files.FileType</td>
+                <td>@Html.ActionLink("Downlaod", "DownLoadFile", new { id = files.DocumentId })</td>
+            </tr>
+        }
+    </table>
+</div>
+<script>
+
+</script>

@@ -1,0 +1,155 @@
+﻿
+@{ Layout = null; }
+@{
+    int t1 = 0;
+    int t2 = 0;
+    int t3 = 0;
+    int t4 = 0;
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Сюда вставляется необходимый шаблбон шапки, которая будет сгенерирована вместе с таблицей
+    </div>
+    <table class="table table-striped">
+
+        <tr>
+
+            @foreach (Earning earning in Model)
+            {
+                @if (earning.OrderId != 0)
+                {
+                    t1 = 1;
+                }
+
+            }
+            @if (t1 == 01)
+            {
+                <th>Номер заказа</th>
+            }
+            @foreach (Earning earning in Model)
+            {
+                @if (earning.UserName != null)
+                {
+                    t2 = 1;
+                }
+
+            }
+            @if (t2 == 01)
+            {
+                <th>Имя покупателя</th>
+            }
+            @foreach (Earning earning in Model)
+            {
+                @if (earning.Payment != 0)
+                {
+                    t3 = 1;
+                }
+
+            }
+            @if (t3 == 01)
+            {
+                <th>Сумма заказа</th>
+            }
+            @foreach (Earning earning in Model)
+            {
+                @if (earning.PaymentDate != null)
+                {
+                    t4 = 1;
+                }
+
+            }
+            @if (t4 == 01)
+            {
+                <th>Дата заказа</th>
+            }
+
+
+
+
+            <th></th>
+        </tr>
+        @foreach (Earning earning in Model)
+        {
+            <tr>
+
+                @if (earning.OrderId != 0)
+                {
+                    <th>@earning.OrderId</th>
+                }
+                @if (earning.UserName != null)
+                {
+                    <th>@earning.UserName</th>
+                }
+                @if (earning.Payment != 0)
+                {
+                    <th>@earning.Payment</th>
+                }
+                @if (earning.PaymentDate != null)
+                {
+                    <th>@earning.PaymentDate</th>
+                }
+
+            </tr>
+        }
+
+    </table>
+</div>
+<p>Сюда также будет вставлен любой шаблонный текст и будущие диаграммы</p>
+<body onload="init()">
+    <div id="chart"></div>
+</body>
+<div id="chart"></div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        //the latest version who worked for me was the 44. 45 and above not worked anymore.
+        google.load("visualization", "44", { packages: ["corechart"] });
+        var interval = setInterval(function () {
+            if (google.visualization !== undefined && google.visualization.DataTable !== undefined && google.visualization.PieChart !== undefined) {
+                clearInterval(interval);
+                window.status = 'ready';
+                drawCharts(); //
+            }
+        }, 100);
+
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            var jsonData = $.ajax({
+                url: "/Data/OnGetChartData",
+                dataType: "json",
+                async: false
+            }).responseText;
+            // Create the data table.
+            var data = new google.visualization.DataTable(jsonData);
+
+            // Set chart options
+            var options = {
+                'title': 'Информация о ',
+                'width': 600,
+                'height': 500,
+                'javascript-delay':1000
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            chart.draw(data, options);
+            function init() {
+                google.load("visualization", "1.1", {
+                    packages: ["corechart"],
+                    callback: 'drawCharts'
+                });
+        }
+    </script>
+}
+

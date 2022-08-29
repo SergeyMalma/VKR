@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MyWebApp.Models.Order>
+<!DOCTYPE html>
+
+@using (Html.BeginForm("TI", "Data", FormMethod.Post))
+{
+    @Html.CheckBox("id", true) <span>ID</span>
+    @Html.CheckBox("name", true) <span>Name</span>
+    @Html.CheckBox("orderid", true) <span>OrderID</span>
+    <input type="submit" value="Показать выбранные столбцы" />
+}
+@using (Html.BeginForm("GetOrderInfo2", "Data", FormMethod.Post))
+{
+    @Html.CheckBox("id", true) <span>ID</span>
+    @Html.CheckBox("name", true) <span>Name</span>
+    @Html.CheckBox("orderid", true) <span>OrderID</span>
+    <input type="submit" value="Сгенерировать отчет" />
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Пользователи и номера их заказов 
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Номер заказа</th>
+            <th></th>
+        </tr>
+        @foreach (Order order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.Name</td>
+                <td>@order.OrderID</td>
+            </tr>
+        }
+    </table>
+</div>

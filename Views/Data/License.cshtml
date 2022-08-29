@@ -1,0 +1,77 @@
+﻿@using MyWebApp.Models
+@{
+    ViewBag.Title = "ASP.NET Identity";
+}
+@using (Html.BeginForm("GetLicenseInfo", "Data", FormMethod.Post))
+{
+    @Html.CheckBox("UserEmail", true) <span>Email пользователя</span>
+    @Html.CheckBox("LicenseName", true) <span>Название лицензии</span>
+    @Html.CheckBox("Month", true) <span>Месяц покупки</span>
+    @Html.CheckBox("Age", true) <span>Возраст пользователя</span>
+
+    <input type="submit" value="Сгенерировать в PDF" />
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Информация о популярности лицензий
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Email пользователя</th>
+            <th>Название лицензии</th>
+            <th>Месяц покупки</th>
+            <th>Возраст</th>
+        </tr>
+        @foreach (License license in Model)
+        {
+            <tr>
+                <td>@license.UserEmail</td>
+
+                <td>@license.LicenseName</td>
+                <td>@license.Month</td>
+                <td>@license.Age</td>
+
+            </tr>
+        }
+    </table>
+</div>
+<div id="chartLicense"></div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            var jsonData = $.ajax({
+                url: "/Data/OnGetChartDataLicense",
+                dataType: "json",
+                async: false
+            }).responseText;
+            // Create the data table.
+            var data = new google.visualization.DataTable(jsonData);
+
+            // Set chart options
+            var options = {
+                'title': 'Соотношение возраста и выбора лицензии',
+                'width': 600,
+                'height': 500,
+
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.SteppedAreaChart(document.getElementById('chartLicense'));
+            chart.draw(data, options);
+        }
+    </script>
+}

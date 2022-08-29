@@ -1,0 +1,24 @@
+﻿
+@model MyWebApp.Models.User
+<h2>Удаление пользователя</h2>
+<dl>
+    <dt>Email пользователя</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>Пароль</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+
+    <dt>Роль пользователя</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Role)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}

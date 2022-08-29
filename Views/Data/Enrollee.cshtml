@@ -1,0 +1,145 @@
+﻿
+<p><a href="/Data/GetEnrolleeInfo">Конвертация отчета в PDF формат</a></p>
+<h3>
+    @foreach (int i in ViewBag.a)
+    {
+        <p>Проходной балл для направления 09.03.02:  @i</p>
+
+    }
+    <p>Всего на направление 09.03.02 подано 52 заявления</p>
+</h3>
+
+
+<div id="t1"></div>
+<div id="t2"></div>
+<div id="t3"></div>
+<body>
+    <div id="table_div"></div>
+</body>
+@section Scripts
+{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            var jsonData = $.ajax({
+                url: "/Data/OnGetChartDataEnrollee1",
+                dataType: "json",
+                async: false
+            }).responseText;
+            // Create the data table.
+            var data = new google.visualization.DataTable(jsonData);
+
+            // Set chart options
+            var options = {
+                'title': 'Количество поданых заявлений по всем направлениям с 2021-06-21 по 2021-06-27',
+                'width': 1300,
+                'height': 500,
+
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById('t1'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            var jsonData2 = $.ajax({
+                url: "/Data/OnGetChartDataEnrollee2",
+                dataType: "json",
+                async: false
+            }).responseText;
+            // Create the data table.
+            var data = new google.visualization.DataTable(jsonData2);
+
+            // Set chart options
+            var options = {
+                'title': 'Количество заявлений на 2021-06-27',
+                'width': 1300,
+                'height': 500,
+
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById('t2'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var jsonData = $.ajax({
+                url: "/Data/OnGetChartDataEnrollee1",
+                dataType: "json",
+                async: false
+            }).responseText;
+            var data = new google.visualization.DataTable(jsonData);
+
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+
+            table.draw(data, { showRowNumber: true, width: '100%', height: '100%', pageSize: '20' });
+        }
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            var jsonData2 = $.ajax({
+                url: "/Data/OnGetChartDataEnrollee3",
+                dataType: "json",
+                async: false
+            }).responseText;
+            // Create the data table.
+            var data = new google.visualization.DataTable(jsonData2);
+
+            // Set chart options
+            var options = {
+                'title': 'Проходной балл на 2021-06-27',
+                'width': 1300,
+                'height': 500,
+
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('t3'));
+            chart.draw(data, options);
+        }
+    </script>
+}

@@ -1,0 +1,95 @@
+﻿@{ Layout = null; }
+@{
+    int t1 = 0;
+    int t2 = 0;
+    int t3 = 0;
+    int t4 = 0;
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Сюда вставляется необходимый шаблбон шапки, которая будет сгенерирована вместе с таблицей
+    </div>
+    <table class="table table-striped">
+
+        <tr>
+
+            @foreach (License license in Model)
+            {
+                @if (license.UserEmail != null)
+                {
+                    t1 = 1;
+                }
+
+            }
+            @if (t1 == 01)
+            {
+                <th>Email пользователя</th>
+            }
+            @foreach (License license in Model)
+            {
+                @if (license.LicenseName != null)
+                {
+                    t2 = 1;
+                }
+
+            }
+            @if (t2 == 01)
+            {
+                <th>Название лицензии</th>
+            }
+            @foreach (License license in Model)
+            {
+                @if (license.Month != null)
+                {
+                    t3 = 1;
+                }
+
+            }
+            @if (t3 == 01)
+            {
+                <th>Месяц покупки</th>
+            }
+            @foreach (License license in Model)
+            {
+                @if (license.Age != 0)
+                {
+                    t4 = 1;
+                }
+
+            }
+            @if (t4 == 01)
+            {
+                <th>Возраст пользователя</th>
+            }
+
+
+            <th></th>
+        </tr>
+        @foreach (License license in Model)
+        {
+            <tr>
+
+                @if (license.UserEmail!= null)
+                {
+                    <th>@license.UserEmail</th>
+                }
+                @if (license.LicenseName!= null)
+                {
+                    <th>@license.LicenseName</th>
+                }
+                @if (license.Month != null)
+                {
+                    <th>@license.Month</th>
+                }
+                @if (license.Age != 0)
+                {
+                    <th>@license.Age</th>
+                }
+
+
+            </tr>
+        }
+
+    </table>
+</div>
+<p>Сюда также будет вставлен любой шаблонный текст и будущие диаграммы</p>

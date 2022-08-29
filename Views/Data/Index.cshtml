@@ -1,0 +1,43 @@
+﻿@using MyWebApp.Models
+
+
+@{
+    ViewBag.Title = "ASP.NET Identity";
+}
+
+<div class="panel panel-primary">
+    <td><p><a href="/Home/Index">Назад на стартовую страницу</a></p></td>
+    <div class="panel-heading">
+        Параметры отчета:
+    </div>
+
+    @Html.CheckBox("UserName", true) <span>Определение проходного балла по направлению:</span>
+    <select name="s1">
+        <option value="t1">09.03.02</option>
+        <option value="t2">10.03.01</option>
+        <option value="t3">09.03.03</option>
+        <option value="t4">09.03.04</option>
+        <option value="t5">10.05.01</option>
+        <option value="t6">38.03.01</option>
+        <option value="t7">38.05.01</option>
+        <option value="t8">01.03.05</option>
+        <option value="t9">03.03.01</option>
+    </select>  <br><br>
+    @Html.CheckBox("Payment", true)<span>Количество заявлений на направление:</span>
+    <select name="s2">
+        <option value="t1">09.03.02</option>
+        <option value="t2">10.03.01</option>
+        <option value="t3">09.03.03</option>
+        <option value="t4">09.03.04</option>
+        <option value="t5">10.05.01</option>
+        <option value="t6">38.03.01</option>
+        <option value="t7">38.05.01</option>
+        <option value="t8">01.03.05</option>
+        <option value="t9">03.03.01</option>
+    </select>  <br><br>
+    @Html.CheckBox("OrderId", true) <span>Количество заявлений по различным направлениям в период времени:</span> <input name="firstname" type="text">
+    <span>-</span> <input name="firstname" type="text"><br><br>
+
+    <p><a href="/Data/Enrollee">Генерация отчета</a></p>
+
+</div>
